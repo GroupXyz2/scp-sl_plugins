@@ -1,4 +1,4 @@
-﻿using CustomPlayerEffects;
+using CustomPlayerEffects;
 using InventorySystem.Items.Usables;
 using InventorySystem.Items.Usables.Scp244.Hypothermia;
 using System;
@@ -8,14 +8,30 @@ using System.Text;
 using LabApi.Events.Handlers;
 using LabApi.Events.Arguments.PlayerEvents;
 using LabApi.Events.Arguments.ServerEvents;
+using LabApi.Features;
 using LabApi.Features.Wrappers;
+using LabApi.Loader.Features.Plugins;
 using UnityEngine;
 
 namespace LabAPISeekEffectDisplay
 {
-    public class EffectDisplay
+    public class EffectDisplay : Plugin
     {
+        public override string Name { get; } = "EffectDisplay";
+        public override string Description { get; } = "Effect Display Plugin";
+        public override string Author { get; } = "SeekEDstroy, GroupXyz";
+        public override Version Version { get; } = new Version(1, 0, 0, 0);
+        public override Version RequiredApiVersion { get; } = new Version(LabApiProperties.CompiledVersion);
+        
         private static Dictionary<Player, string> playerEffectTexts = new Dictionary<Player, string>();
+        
+        public override void Enable()
+        {
+        }
+
+        public override void Disable()
+        {
+        }
 
         public static void RegisterEvents()
         {
