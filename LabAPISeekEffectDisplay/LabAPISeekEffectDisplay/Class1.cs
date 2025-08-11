@@ -27,20 +27,12 @@ namespace LabAPISeekEffectDisplay
         
         public override void Enable()
         {
-        }
-
-        public override void Disable()
-        {
-        }
-
-        public static void RegisterEvents()
-        {
             PlayerEvents.Spawned += OnPlayerSpawn;
             PlayerEvents.Death += OnPlayerDied;
             ServerEvents.RoundRestarted += OnRoundRestart;
         }
 
-        public static void UnregisterEvents()
+        public override void Disable()
         {
             PlayerEvents.Spawned -= OnPlayerSpawn;
             PlayerEvents.Death -= OnPlayerDied;
