@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using LabApi.Events.Arguments.PlayerEvents;
 using LabApi.Events.Handlers;
 using LabApi.Features;
@@ -104,6 +104,7 @@ namespace coinflip
                 }
                 return;
             }
+
             if (_lastFlipTimes.TryGetValue(playerId, out var lastFlip))
             {
                 var remaining = _flipCooldown - (now - lastFlip);
@@ -113,6 +114,13 @@ namespace coinflip
                     return;
                 }
             }
+            
+            if (player.Items.Count() >= 8)
+            {
+                player.SendHint("<color=red>Dein Inventar ist voll! Entferne Items bevor du Coinflip benutzt.</color>", 8F);
+                return;
+            }
+            
             _lastFlipTimes[playerId] = now;
             if (!ev.IsTails)
             {
