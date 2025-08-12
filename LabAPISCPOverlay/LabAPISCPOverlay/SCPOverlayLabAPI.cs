@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -158,12 +158,32 @@ namespace LabAPISCPOverlay
                 }
             }
             // SCP-106 Vigor
-            float scp106Vigor = 0;
-            if (target.Role == RoleTypeId.Scp106 && target.RoleBase is Scp106Role scp106)
+            float scp106Vigor = 0F;
+            if (target.RoleBase is Scp106Role scp106)
             {
-                if (scp106.SubroutineModule.TryGetSubroutine(out Scp106VigorAbilityBase abilityBase))
+                try
                 {
-                    scp106Vigor = abilityBase.VigorAmount;
+                    if (scp106.SubroutineModule.TryGetSubroutine(out Scp106VigorAbilityBase vigorAbility))
+                    {
+                        var vigorProperty = typeof(Scp106VigorAbilityBase).GetProperty("VigorAmount",
+                            System.Reflection.BindingFlags.NonPublic |
+                            System.Reflection.BindingFlags.Instance |
+                            System.Reflection.BindingFlags.Public);
+
+                        if (vigorProperty != null)
+                        {
+                            var vigorValue = vigorProperty.GetValue(vigorAbility);
+                
+                            if (vigorValue is float vigor)
+                            {
+                                scp106Vigor = vigor;
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    scp106Vigor = 0F;
                 }
             }
             return raw
@@ -219,12 +239,32 @@ namespace LabAPISCPOverlay
                     scp079Energy = auxManager.CurrentAux;
                 }
             }
-            float scp106Vigor = 0;
-            if (target.Role == RoleTypeId.Scp106 && target.RoleBase is Scp106Role scp106)
+            float scp106Vigor = 0F;
+            if (target.RoleBase is Scp106Role scp106)
             {
-                if (scp106.SubroutineModule.TryGetSubroutine(out Scp106VigorAbilityBase abilityBase))
+                try
                 {
-                    scp106Vigor = abilityBase.VigorAmount;
+                    if (scp106.SubroutineModule.TryGetSubroutine(out Scp106VigorAbilityBase vigorAbility))
+                    {
+                        var vigorProperty = typeof(Scp106VigorAbilityBase).GetProperty("VigorAmount",
+                            System.Reflection.BindingFlags.NonPublic |
+                            System.Reflection.BindingFlags.Instance |
+                            System.Reflection.BindingFlags.Public);
+
+                        if (vigorProperty != null)
+                        {
+                            var vigorValue = vigorProperty.GetValue(vigorAbility);
+                
+                            if (vigorValue is float vigor)
+                            {
+                                scp106Vigor = vigor;
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    scp106Vigor = 0F;
                 }
             }
             return raw
@@ -253,7 +293,7 @@ namespace LabAPISCPOverlay
             if (player == null || player.Room == null)
                 return "Unbekannt";
 
-            return player.Room.ToString();
+            return player.Room.Name.ToString();
         }
 
         private static string GetScp079XpProgress(int level, int xp)
