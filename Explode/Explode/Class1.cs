@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Reflection;
 using CommandSystem;
@@ -133,7 +133,7 @@ namespace Explode
                 }
                 catch (Exception e)
                 {
-                    response = "Ungültiger ItemType: " + e.Message + "\n Available types: \n ItemType.GrenadeFlash \u2192 Flashbang grenade\n    ItemType.GrenadeHE \u2192 High explosive (frag) grenade\n    ItemType.SCP018 \u2192 SCP-018 (bouncy ball)\n    ItemType.SCP2176 \u2192 SCP-2176 grenade\n    ItemType.Coal \u2192 Coal (deprecated/special)\n    ItemType.SpecialCoal \u2192 Special coal (deprecated/special)\n    ItemType.Snowball \u2192 Snowball (deprecated/special)\n";
+                    response = "Ungültiger ItemType: " + e.Message + "\n Available types: \n ItemType.GrenadeFlash \u2192 Flashbang grenade\n    ItemType.GrenadeHE \u2192 High explosive (frag) grenade\n    ItemType.SCP018 \u2192 SCP-018 (bouncy ball)\n    ItemType.SCP2176 \u2192 SCP-2176 (ghost light)\n";
                     return false;
                 }
             }
